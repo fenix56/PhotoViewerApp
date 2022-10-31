@@ -12,7 +12,7 @@ class PhotoCollectionViewModel {
     let assetsLimit = 1000
     let cachingTargetSize = CGSize(width: 100, height: 100)
     
-    private var photos = PHFetchResult<PHAsset>()
+    private var photos: PHFetchResult<PHAsset>
     let imageManager: PHCachingImageManager
     
     init(imageManager: PHCachingImageManager, photos: PHFetchResult<PHAsset> = PHFetchResult<PHAsset>()) {
