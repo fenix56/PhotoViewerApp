@@ -1,6 +1,6 @@
 # PhotoViewerApp
 
-Application created to demonstrate [my](https://github.com/fenix56) expertise in Swift and iOS development. App using MVVM-C architectural design pattern, for this app complexity is a bit overkill, but I wanted to show my knowledge in that topic as well. App has 2 screens which will be described below:
+Application created to demonstrate [my](https://github.com/fenix56) expertise in Swift and iOS development. App use MVVM-C architectural design pattern, for this app complexity is a bit overkill, but I wanted to show my knowledge in that topic as well. App has 2 screens which will be described below:
 
 ## Home Screen
 On the start of app you should see this screen:
@@ -19,4 +19,4 @@ I'm using the Vision framework to analyse attention-based saliency for the image
 ![MacDown Screenshot](https://snipboard.io/GjeK0F.jpg)
 
 # Summary
-I wrote this application in a few hours, but if I had spent a more time on it, I would certainly have experimented more with the Vision framework. Also I would add more advanced annimations to image and rectangle aspect transitions. The part of code I would hightlight is UIImageView+Extension file in Utils folder. I've implemented there actual image request from PhotoKit method and Vision framework usage.
+I wrote this application in a few hours, but if I had spent a more time on it, I would certainly have experimented more with the Vision framework. Also I would add more advanced annimations to image and rectangle aspect transitions. The part of code I would hightlight is *UIImageView+Extension* file in **Utility** folder. I've implemented there actual image request from PhotoKit method and Vision framework usage.
