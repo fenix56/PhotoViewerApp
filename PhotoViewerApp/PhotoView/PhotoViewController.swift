@@ -15,23 +15,13 @@ enum ImageContentMode {
 
 class PhotoViewController: UIViewController {
     @IBOutlet weak var photoView: UIImageView!
-    
-    var asset: PHAsset
-    var imageManager: PHCachingImageManager
+    var assetImage: UIImage? { didSet {
+        getPhoto()
+    }}
     
     private var aspectType = ImageContentMode.aspectFill
     private var maskLayer: CALayer?
     private var boundsDict: [ImageContentMode: CGRect] = [:]
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) not implemented")
-    }
-    
-    init?(asset: PHAsset, imageManager: PHCachingImageManager, coder: NSCoder) {
-        self.asset = asset
-        self.imageManager = imageManager
-        super.init(coder: coder)
-    }
     
     @IBAction func magnifyButtonTapped(_ sender: Any) {
         setImageAspect()
@@ -49,7 +39,9 @@ class PhotoViewController: UIViewController {
     }
     
     func getPhoto() {
-        photoView.fetchImageAsset(asset, imageManager: imageManager, targetSize: view.bounds.size, completionHandler: nil)
+        if photoView != nil {
+            photoView.image = assetImage
+        }
     }
     
     private func identifyAndDrawLayer() {

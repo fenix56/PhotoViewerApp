@@ -10,26 +10,6 @@ import Photos
 import Vision
 
 extension UIImageView {
-    // MARK: - Photos Image Request method
-    func fetchImageAsset(_ asset: PHAsset?, imageManager: PHCachingImageManager, targetSize: CGSize, contentMode: PHImageContentMode = .aspectFill, options: PHImageRequestOptions? = nil, completionHandler: ((Bool) -> Void)?) {
-        guard let asset = asset else {
-            completionHandler?(false)
-            return
-        }
-        
-        let resultHandler: (UIImage?, [AnyHashable: Any]?) -> Void = { image, _ in
-            self.image = image
-            completionHandler?(true)
-        }
-        
-        imageManager.requestImage(
-            for: asset,
-            targetSize: targetSize,
-            contentMode: contentMode,
-            options: options,
-            resultHandler: resultHandler)
-    }
-    
     // MARK: - Attention-based saliency for image methods
     func detectRectangle() -> CGRect {
         

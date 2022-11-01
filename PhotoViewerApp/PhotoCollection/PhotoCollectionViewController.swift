@@ -11,6 +11,9 @@ import Photos
 class PhotoCollectionViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     var viewModel: PhotoCollectionViewModel?
+    var coordinator: Coordinator?
+    
+    private var transitionInProgress = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,12 +26,7 @@ class PhotoCollectionViewController: UIViewController {
             }
         }
     }
-    
-    @IBSegueAction func preparePhotoViewController(_ coder: NSCoder) -> PhotoViewController? {
-        guard let viewModel = viewModel, let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first else { return nil }
-        return PhotoViewController(asset: viewModel.getPhoto(at: selectedIndexPath.item), imageManager: viewModel.imageManager, coder: coder)
-    }
-    
+
     private func getPermissionIfNeeded(completionHandler: @escaping (Bool) -> Void) {
         guard PHPhotoLibrary.authorizationStatus() != .authorized else {
             completionHandler(true)
@@ -57,13 +55,20 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
             for: indexPath) as? PhotoCollectionViewCell else {
             fatalError("Unable to dequeue PhotoCollectionViewCell")
         }
-        let asset = viewModel.getPhoto(at: indexPath.item)
-        cell.photoImageView.fetchImageAsset(
-            asset,
-            imageManager: viewModel.imageManager,
-            targetSize: viewModel.cachingTargetSize, // cell.photoImageView.bounds.size,
-            completionHandler: nil)
+        
+        viewModel.fetchImageAsset(indexPath.item, contentMode: .aspectFit, targetSize: nil, options: nil) { image in
+            cell.photoImageView.image = image
+        }
+
         return cell
+    }
+}
+
+extension PhotoCollectionViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let viewModel = viewModel {
+            coordinator?.showDetails(indexPath.item, viewModel: viewModel)
+        }
     }
 }
 

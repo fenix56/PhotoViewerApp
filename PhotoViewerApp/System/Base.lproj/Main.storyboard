@@ -48,7 +48,6 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="photoImageView" destination="FUK-gJ-waO" id="3M6-uB-lOX"/>
-                                            <segue destination="u5G-rG-IEf" kind="show" destinationCreationSelector="preparePhotoViewController:" id="VmL-nr-q0h"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -83,7 +82,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmm-KC-Qq2">
-                                <rect key="frame" x="0.0" y="91" width="390" height="719"/>
+                                <rect key="frame" x="0.0" y="47" width="390" height="763"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qc2-pN-wCT"/>
@@ -119,7 +118,6 @@
         <!--Navigation Controller-->
         <scene sceneID="FRd-cN-nha">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KJh-6D-0fU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="navigationController" automaticallyAdjustsScrollViewInsets="NO" id="KOZ-RW-ss8" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ylT-Et-9ns">
@@ -131,6 +129,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="283-Mx-tYd"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KJh-6D-0fU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="47.692307692307693" y="-2.1327014218009479"/>
         </scene>

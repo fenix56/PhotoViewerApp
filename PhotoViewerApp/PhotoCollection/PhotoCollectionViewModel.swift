@@ -7,48 +7,30 @@
 
 import Foundation
 import Photos
+import UIKit
 
 class PhotoCollectionViewModel {
-    let assetsLimit = 1000
-    let cachingTargetSize = CGSize(width: 100, height: 100)
+    let photoManager: PhotoManagerActions
     
-    private var photos: PHFetchResult<PHAsset>
-    let imageManager: PHCachingImageManager
-    
-    init(imageManager: PHCachingImageManager, photos: PHFetchResult<PHAsset> = PHFetchResult<PHAsset>()) {
-        self.photos = photos
-        self.imageManager = imageManager
+    init(photoManager: PhotoManagerActions) {
+        self.photoManager = photoManager
     }
         
     func fetchPhotos() {
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.fetchLimit = assetsLimit
-        fetchOptions.sortDescriptors = [
-            NSSortDescriptor(
-                key: "creationDate",
-                ascending: false)
-        ]
-        photos = PHAsset.fetchAssets(with: fetchOptions)
-        cachePhotos()
+        photoManager.fetchPhotos()
     }
-    
-    private func cachePhotos() {
-        let indexSet = IndexSet(0..<photos.count)
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        requestOptions.deliveryMode = .highQualityFormat
-        imageManager.startCachingImages(
-            for: photos.objects(at: indexSet),
-            targetSize: cachingTargetSize,
-            contentMode: .default,
-            options: requestOptions)
-    }
-    
+
     func getPhoto(at index: Int) -> PHAsset {
-        return photos[index]
+        return photoManager.getPhoto(at: index)
     }
     
     var photosCount: Int {
-        return photos.count
+        return photoManager.photosCount
+    }
+    
+    func fetchImageAsset(_ index: Int, contentMode: PHImageContentMode, targetSize: CGSize?, options: PHImageRequestOptions?, completionHandler: ((UIImage) -> Void)?) {
+        photoManager.fetchImageAsset(index, contentMode: contentMode, targetSize: targetSize, options: options) { image in
+            completionHandler?(image)
+        }
     }
 }

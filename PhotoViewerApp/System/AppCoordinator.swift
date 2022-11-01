@@ -11,6 +11,7 @@ import Photos
 
 protocol Coordinator: AnyObject {
     func start()
+    func showDetails(_ index: Int, viewModel: PhotoCollectionViewModel)
 }
 
 class AppCoordinator: Coordinator {
@@ -34,8 +35,19 @@ class AppCoordinator: Coordinator {
         guard let photoCollectionVC = navController.viewControllers.first as? PhotoCollectionViewController else {
             fatalError("Couldn't instantiate PhotoCollectionViewController!")
         }
-        photoCollectionVC.viewModel = PhotoCollectionViewModel(imageManager: PHCachingImageManager())
+        photoCollectionVC.viewModel = PhotoCollectionViewModel( photoManager: PhotoManager())
+        photoCollectionVC.coordinator = self
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
+    }
+    
+    func showDetails(_ index: Int, viewModel: PhotoCollectionViewModel) {
+        guard let photoVC = storyboard.instantiateViewController(withIdentifier: photoViewIndentifier) as? PhotoViewController else {
+            fatalError("Couldn't instantiate PhotoViewController!")
+        }
+        viewModel.fetchImageAsset(index, contentMode: .aspectFit, targetSize: UIScreen.main.bounds.size, options: nil, completionHandler: { image in
+            photoVC.assetImage = image
+        })
+        navController.pushViewController(photoVC, animated: true)
     }
 }
