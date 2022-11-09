@@ -9,7 +9,11 @@ import Foundation
 import Photos
 import UIKit
 
-class PhotoCollectionViewModel {
+protocol AssetFetchable {
+    func fetchImageAsset(_ index: Int, contentMode: PHImageContentMode, targetSize: CGSize?, options: PHImageRequestOptions?, completionHandler: ((UIImage) -> Void)?)
+}
+
+class PhotoCollectionViewModel: AssetFetchable {
     let photoManager: PhotoManagerActions
     
     init(photoManager: PhotoManagerActions) {

@@ -67,7 +67,7 @@ extension PhotoCollectionViewController: UICollectionViewDataSource {
 extension PhotoCollectionViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let viewModel = viewModel {
-            coordinator?.showDetails(indexPath.item, viewModel: viewModel)
+            coordinator?.showDetails(indexPath.item, fetcher: viewModel)
         }
     }
 }

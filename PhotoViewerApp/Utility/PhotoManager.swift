@@ -2,7 +2,7 @@
 //  PhotoManager.swift
 //  PhotoViewerApp
 //
-//  Created by MAC on 01/11/22.
+//  Created by Przemek on 01/11/2022.
 //
 
 import Foundation
